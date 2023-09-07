@@ -18,13 +18,13 @@ pool:
   vmImage: $(imageName)
 
 steps:
-- task: SonarCloudPrepare@1
-  inputs:
-    SonarCloud: '66420b06-0308-4157-9b80-ef53c71c6596'
-    organization: 'wulfland-github'
-    projectKey: 'cov-demo'
-    projectName: 'Coverage Demo'
-    extraProperties: 'sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/coverage/coverage.opencover.xml'
+# - task: SonarCloudPrepare@1
+#   inputs:
+#     SonarCloud: '66420b06-0308-4157-9b80-ef53c71c6596'
+#     organization: 'wulfland-github'
+#     projectKey: 'cov-demo'
+#     projectName: 'Coverage Demo'
+#     extraProperties: 'sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/coverage/coverage.opencover.xml'
 
 - script: dotnet build $(solution) --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration).'
@@ -45,11 +45,11 @@ steps:
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
   displayName: Run Reportgenerator on Windows
 
-- task: SonarSource.sonarcloud.ce096e50-6155-4de8-8800-4221aaeed4a1.SonarCloudAnalyze@1
-  displayName: 'Run Code Analysis'
+# - task: SonarSource.sonarcloud.ce096e50-6155-4de8-8800-4221aaeed4a1.SonarCloudAnalyze@1
+#   displayName: 'Run Code Analysis'
 
-- task: SonarCloudPublish@1
-  displayName: 'Publish Quality Gate Results'
+# - task: SonarCloudPublish@1
+#   displayName: 'Publish Quality Gate Results'
 
 - task: PublishTestResults@2
   inputs:
